@@ -1,0 +1,6 @@
+.main-payment{
+    margin-top: 7em;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+}

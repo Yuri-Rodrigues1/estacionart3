@@ -6,7 +6,16 @@ import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import Payment from "./components/Payment/Payment";
 
+
+const AppContainer = styled.div`
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 15px; 
+  justify-content: flex-end;
+  
+`;
 
 const Container = styled.div`
   width: 170%;
@@ -16,6 +25,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
 `;
 
 const Title = styled.h2``;
@@ -42,13 +52,16 @@ function App() {
 
   return (
     <>
-      <Container>
-        <Title>E s t a c i o n a r t e</Title>
-        <p>Vagas Livres: {availableVagas}</p>
-        <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
-        <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
-      </Container>
-      <ToastContainer autoClose={1000} position={toast.POSITION.BOTTOM_LEFT} />
+      <AppContainer>
+        <Container>
+          <Title>E s t a c i o n a r t e</Title>
+          <p>Vagas Livres: {availableVagas}</p>
+          <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
+          <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
+        </Container>
+        <ToastContainer autoClose={1000} position={toast.POSITION.BOTTOM_LEFT} />
+        <Payment/>
+      </AppContainer>
       <GlobalStyle />
     </>
   );

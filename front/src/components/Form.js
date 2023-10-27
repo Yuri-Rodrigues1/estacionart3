@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
 
@@ -41,6 +41,7 @@ const Button = styled.button`
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
+  const [selectedTipo, setSelectedTipo] = useState(''); // Estado para armazenar a opção de "tipo" selecionada
 
   useEffect(() => {
     if (onEdit) {
@@ -49,7 +50,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       user.placa.value = onEdit.placa;
       user.descricao.value = onEdit.descricao;
       user.entrada.value = onEdit.entrada;
-      user.tipo.value = onEdit.tipo;
+      setSelectedTipo(onEdit.tipo); // Define o valor selecionado do select
     }
   }, [onEdit]);
 
@@ -62,7 +63,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       !user.placa.value ||
       !user.descricao.value ||
       !user.entrada.value ||
-      !user.tipo.value
+      !selectedTipo
     ) {
       return toast.warn("Preencha todos os campos!");
     }
@@ -73,7 +74,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           placa: user.placa.value,
           descricao: user.descricao.value,
           entrada: user.entrada.value,
-          tipo: user.tipo.value,
+          tipo: selectedTipo, // Usar selectedTipo ao invés de user.tipo.value
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -83,7 +84,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           placa: user.placa.value,
           descricao: user.descricao.value,
           entrada: user.entrada.value,
-          tipo: user.tipo.value,
+          tipo: selectedTipo, // Usar selectedTipo ao invés de user.tipo.value
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -92,7 +93,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     user.placa.value = "";
     user.descricao.value = "";
     user.entrada.value = "";
-    user.tipo.value = "";
+    setSelectedTipo(''); // Limpar a opção selecionada do select
 
     setOnEdit(null);
     getUsers();
@@ -110,11 +111,24 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Entrada</Label>
-        <Input name="entrada" />
+        <Input name="entrada" placeholder="HH"/>
       </InputArea>
       <InputArea>
         <Label>Tipo</Label>
-        <Input name="tipo" />
+        <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)}>
+          <option value="">Selecione...</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </InputArea>
+      <InputArea>
+        <Label>Tipo Cli</Label>
+        <select>
+          <option value="">Selecione...</option>
+          <option value="1">Hora</option>
+          <option value="2">Diaria</option>
+          <option value="2">Mensalista</option>
+        </select>
       </InputArea>
       <Button type="submit">SALVAR</Button>
     </FormContainer>

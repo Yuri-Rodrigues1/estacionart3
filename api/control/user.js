@@ -1,4 +1,5 @@
 import { db } from "../index.js";
+import express from 'express';
 
 export const getUsers = (_, res) => {
     const q = "SELECT * FROM cad_veiculos";
@@ -52,7 +53,7 @@ export const deleteUser = (req, res) => {
     db.query(q, [req.params.idVei], (err) => {
         if (err) return res.json(err);
 
-        return res.status(200).json("Veículo Selecionado.");
+    return res.redirect('/nova-pagina'); // Substitua '/nova-pagina' pela rota desejada.
 
     })
 };
