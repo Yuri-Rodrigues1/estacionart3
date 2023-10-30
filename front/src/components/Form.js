@@ -41,7 +41,8 @@ const Button = styled.button`
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
-  const [selectedTipo, setSelectedTipo] = useState(''); // Estado para armazenar a opção de "tipo" selecionada
+  const [selectedTipo, setSelectedTipo] = useState('');
+  const [selectedTipocli, setSelectedTipocli] = useState(''); // Estado para armazenar a opção de "tipo" selecionada
 
   useEffect(() => {
     if (onEdit) {
@@ -50,7 +51,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       user.placa.value = onEdit.placa;
       user.descricao.value = onEdit.descricao;
       user.entrada.value = onEdit.entrada;
-      setSelectedTipo(onEdit.tipo); // Define o valor selecionado do select
+      setSelectedTipo(onEdit.tipo);
+      setSelectedTipocli(onEdit.tipocli); 
     }
   }, [onEdit]);
 
@@ -63,7 +65,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       !user.placa.value ||
       !user.descricao.value ||
       !user.entrada.value ||
-      !selectedTipo
+      !selectedTipo ||
+      !selectedTipocli
     ) {
       return toast.warn("Preencha todos os campos!");
     }
@@ -74,7 +77,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           placa: user.placa.value,
           descricao: user.descricao.value,
           entrada: user.entrada.value,
-          tipo: selectedTipo, // Usar selectedTipo ao invés de user.tipo.value
+          tipo: selectedTipo, 
+          tipocli: selectedTipocli
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -84,7 +88,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           placa: user.placa.value,
           descricao: user.descricao.value,
           entrada: user.entrada.value,
-          tipo: selectedTipo, // Usar selectedTipo ao invés de user.tipo.value
+          tipo: selectedTipo, 
+          tipocli: selectedTipocli
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -93,7 +98,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     user.placa.value = "";
     user.descricao.value = "";
     user.entrada.value = "";
-    setSelectedTipo(''); // Limpar a opção selecionada do select
+    setSelectedTipo(''); 
+    setSelectedTipocli('');
 
     setOnEdit(null);
     getUsers();
@@ -123,7 +129,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Tipo Cli</Label>
-        <select>
+        <select value={selectedTipocli} onChange={(e)=> setSelectedTipocli(e.target.value)}>
           <option value="">Selecione...</option>
           <option value="1">Hora</option>
           <option value="2">Diaria</option>

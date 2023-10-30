@@ -13,13 +13,14 @@ export const getUsers = (_, res) => {
 
 export const addUser = (req, res) => {
     const q =
-        "INSERT INTO cad_veiculos(`placa`, `descricao`, `entrada`, `tipo`) VALUES(?)";
+        "INSERT INTO cad_veiculos(`placa`, `descricao`, `entrada`, `tipo`, `tipocli`) VALUES(?)";
 
     const values = [
         req.body.placa,
         req.body.descricao,
         req.body.entrada,
         req.body.tipo,
+        req.body.tipocli
     ];
 
     db.query(q, [values], (err) => {
@@ -31,13 +32,14 @@ export const addUser = (req, res) => {
 
 export const updateUser = (req, res) => {
     const q =
-        "UPDATE cad_veiculos SET `placa` = ?, `descricao` = ?, `entrada` = ?, `tipo` = ? WHERE `idVei` = ?";
+        "UPDATE cad_veiculos SET `placa` = ?, `descricao` = ?, `entrada` = ?, `tipo` = ?, `tipocli` WHERE `idVei` = ?";
 
     const values = [
         req.body.placa,
         req.body.descricao,
         req.body.entrada,
         req.body.tipo,
+        req.body.tipocli
     ];
 
     db.query(q, [...values, req.params.idVei], (err) => {
@@ -50,10 +52,20 @@ export const updateUser = (req, res) => {
 export const deleteUser = (req, res) => {
     const q = "DELETE FROM cad_veiculos WHERE `idVei` = ?";
 
-    db.query(q, [req.params.idVei], (err) => {
-        if (err) return res.json(err);
+    db.query(q, [req.params.idVei], (err, result) => {
+        if (err) {
+            return res.json(err);
+        }
+        
 
-    return res.redirect('/nova-pagina'); // Substitua '/nova-pagina' pela rota desejada.
+        if (result.affectedRows === 0) {
+            return res.status(404).json("Veículo não encontrado");
+        }
 
-    })
+        
+        return res.status(200).json("Veículo Excluído.");
+    });
 };
+
+
+

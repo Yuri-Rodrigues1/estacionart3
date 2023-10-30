@@ -8,13 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Payment from "./components/Payment/Payment";
 
-
 const AppContainer = styled.div`
-  display: flex; 
-  flex-wrap: wrap; 
-  gap: 15px; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
   justify-content: flex-end;
-  
 `;
 
 const Container = styled.div`
@@ -33,6 +31,7 @@ const Title = styled.h2``;
 function App() {
   const [users, setUsers] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
+  const [deletedItem, setDeletedItem] = useState(null);
 
   const getUsers = async () => {
     try {
@@ -45,10 +44,9 @@ function App() {
 
   useEffect(() => {
     getUsers();
-  }, [setUsers]);
+  }, []);
 
-
-  const availableVagas = 100 - users.length; 
+  const availableVagas = 100 - users.length;
 
   return (
     <>
@@ -57,10 +55,16 @@ function App() {
           <Title>E s t a c i o n a r t e</Title>
           <p>Vagas Livres: {availableVagas}</p>
           <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
-          <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} />
+          <Grid
+            setOnEdit={setOnEdit}
+            users={users}
+            setUsers={setUsers}
+            setDeletedItem={setDeletedItem}
+            deletedItem={deletedItem}
+          />
         </Container>
         <ToastContainer autoClose={1000} position={toast.POSITION.BOTTOM_LEFT} />
-        <Payment/>
+        <Payment deletedItem={deletedItem} />
       </AppContainer>
       <GlobalStyle />
     </>
