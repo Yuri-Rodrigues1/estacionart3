@@ -13,20 +13,42 @@ const Payment = ({ deletedItem }) => {
 
     //se o cliente for horista
     if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 1) {
-      
-    for(let i=0; i<calhora; i++){
-      valorFinal = valorFinal + 15 
 
+      //se for carro
+      if(deletedItem.tipo === 1){
+        for(let i=0; i<calhora; i++){
+        valorFinal = valorFinal + 15 
+          }
+        setValor(valorFinal)
       }
-      setValor(valorFinal)
-    }
+      // se for moto
+      if(deletedItem.tipo === 2){
+        for(let i=0; i<calhora; i++){
+        valorFinal = valorFinal + 10 
+          }
+        setValor(valorFinal)
+      }
+ 
+          
+        }
     //cliente diaria
     if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 2) {
+      if(deletedItem.tipo === 1){
         setValor(70)
       }
-
+      if(deletedItem.tipo === 2){
+        setValor(50)
+      }
+        
+      }
+      //se o cliente for mensalista
     if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 3) {
+      if(deletedItem.tipo === 1){
         setValor(200)
+      }
+      if(deletedItem.tipo === 1){
+        setValor(150)
+      }
       }  
     }
     

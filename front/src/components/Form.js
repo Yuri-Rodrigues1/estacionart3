@@ -123,8 +123,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         <Label>Tipo</Label>
         <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)}>
           <option value="">Selecione...</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
+          <option value="1">Moto</option>
+          <option value="2">Carro</option>
         </select>
       </InputArea>
       <InputArea>
