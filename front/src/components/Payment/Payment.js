@@ -8,52 +8,57 @@ const Payment = ({ deletedItem }) => {
   const handleCal = () => {
     const entrada = parseFloat(deletedItem.entrada);
     const saidaValue = parseFloat(saida);
+    const calhora = saidaValue - entrada;
+    let valorFinal = 0
 
+    //se o cliente for horista
     if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 1) {
-      const calhora = saidaValue - entrada;
-      setValor(calhora);
+      
+    for(let i=0; i<calhora; i++){
+      valorFinal = valorFinal + 15 
+
+      }
+      setValor(valorFinal)
     }
-  }
+    //cliente diaria
+    if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 2) {
+        setValor(70)
+      }
+
+    if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 3) {
+        setValor(200)
+      }  
+    }
+    
 
   return (
     <div className='main-payment'>
+      <h3>Pagamento</h3>
       <label>Descrição</label>
       {deletedItem && (
-        <textarea value={deletedItem.descricao || ''} />
+        <textarea readOnly value={deletedItem.descricao || ''} />
       )}
       <label>Placa</label>
       {deletedItem && (
-        <textarea value={deletedItem.placa || ''} />
+        <textarea readOnly value={deletedItem.placa || ''} />
       )}
       <label>Tipo</label>
       {deletedItem && (
-        <textarea value={deletedItem.tipo || ''} />
+        <textarea readOnly value={deletedItem.tipo || ''} />
       )}
       <label>Tipo Clien</label>
       {deletedItem && (
-        <textarea value={deletedItem.tipocli || ''} />
+        <textarea readOnly value={deletedItem.tipocli || ''} />
       )}
       <label>Entrada</label>
       {deletedItem && (
-        <textarea value={deletedItem.entrada || ''} />
+        <textarea readOnly value={deletedItem.entrada || ''} />
       )}
       <label>Saída</label>
       <input onChange={(e) => setSaida(e.target.value)} />
-      <div>
-        <select>
-          <option value="">Tipo Vei...</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-        <select>
-          <option value="">Tipo Cli...</option>
-          <option value="1">Hora</option>
-          <option value="2">Diaria</option>
-          <option value="3">Mensalista</option>
-        </select>
-      </div>
+  
       <label>Valor a ser pago</label>
-      <textarea value={valor} />
+      <p>R${valor}.00</p>
       <button onClick={handleCal}>Calcular</button>
     </div>
   );

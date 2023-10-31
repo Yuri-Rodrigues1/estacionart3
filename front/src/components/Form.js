@@ -133,7 +133,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
           <option value="">Selecione...</option>
           <option value="1">Hora</option>
           <option value="2">Diaria</option>
-          <option value="2">Mensalista</option>
+          <option value="3">Mensalista</option>
         </select>
       </InputArea>
       <Button type="submit">SALVAR</Button>
