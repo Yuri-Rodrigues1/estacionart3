@@ -6,52 +6,37 @@ const Payment = ({ deletedItem }) => {
   const [valor, setValor] = useState(0);
 
   const handleCal = () => {
-    const entrada = parseFloat(deletedItem.entrada);
-    const saidaValue = parseFloat(saida);
-    const calhora = saidaValue - entrada;
-    let valorFinal = 0
+    const entrada = new Date(deletedItem.entrada);
+    const saidaValue = new Date(saida);
+    const timeDifference = (saidaValue - entrada) / (1000 * 60 * 60); // fazer o calculo da diferença em horas
 
-    //se o cliente for horista
-    if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 1) {
+    let valorFinal = 0;
 
-      //se for carro
-      if(deletedItem.tipo === 1){
-        for(let i=0; i<calhora; i++){
-        valorFinal = valorFinal + 15 
-          }
-        setValor(valorFinal)
-      }
-      // se for moto
-      if(deletedItem.tipo === 2){
-        for(let i=0; i<calhora; i++){
-        valorFinal = valorFinal + 10 
-          }
-        setValor(valorFinal)
-      }
- 
-          
+    if (timeDifference >= 1) {
+      // verificando o tipo do cliente 
+      if(deletedItem.tipocli === 1){
+        // verificando o tipo do veículo
+        if (deletedItem.tipo === 1) {
+          valorFinal = timeDifference * 15;
+        } else if (deletedItem.tipo === 2) {
+          valorFinal = timeDifference * 20;
         }
-    //cliente diaria
-    if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 2) {
-      if(deletedItem.tipo === 1){
-        setValor(70)
       }
-      if(deletedItem.tipo === 2){
-        setValor(50)
+    }else if(deletedItem.tipocli === 2){
+      if (deletedItem.tipo === 1) {
+        valorFinal = 50;
+      } else if (deletedItem.tipo === 2) {
+        valorFinal = 75
       }
-        
+    }else if(deletedItem.tipocli === 3){
+      if (deletedItem.tipo === 1) {
+        valorFinal = 200
+      } else if (deletedItem.tipo === 2) {
+        valorFinal = 250
       }
-      //se o cliente for mensalista
-    if (!isNaN(entrada) && !isNaN(saidaValue) && deletedItem.tipocli === 3) {
-      if(deletedItem.tipo === 1){
-        setValor(200)
-      }
-      if(deletedItem.tipo === 1){
-        setValor(150)
-      }
-      }  
-    }
-    
+    } 
+    setValor(valorFinal);
+  };
 
   return (
     <div className='main-payment'>
@@ -68,20 +53,21 @@ const Payment = ({ deletedItem }) => {
       {deletedItem && (
         <textarea readOnly value={deletedItem.tipo || ''} />
       )}
-      <label>Tipo Clien</label>
+      <label>Tipo Cliente</label>
       {deletedItem && (
         <textarea readOnly value={deletedItem.tipocli || ''} />
       )}
       <label>Entrada</label>
       {deletedItem && (
-        <textarea readOnly value={deletedItem.entrada || ''} />
+        <input readOnly value={deletedItem.entrada || ''} />
       )}
       <label>Saída</label>
-      <input onChange={(e) => setSaida(e.target.value)} />
-  
+      <input type="datetime-local" onChange={(e) => setSaida(e.target.value)} />
+
       <label>Valor a ser pago</label>
-      <p>R${valor}.00</p>
+      <p>R${valor.toFixed(2)}</p>
       <button onClick={handleCal}>Calcular</button>
+      <button onClick={()=>{window.location.reload()}}>Gerar Boleto</button>  
     </div>
   );
 };

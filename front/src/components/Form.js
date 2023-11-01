@@ -117,8 +117,9 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Entrada</Label>
-        <Input name="entrada" placeholder="HH"/>
+        <input type="datetime-local" name="entrada" />
       </InputArea>
+
       <InputArea>
         <Label>Tipo</Label>
         <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)}>
