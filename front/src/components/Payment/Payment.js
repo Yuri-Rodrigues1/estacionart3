@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../Payment/Payment.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Payment = ({ deletedItem }) => {
   const [saida, setSaida] = useState('');
@@ -39,36 +40,49 @@ const Payment = ({ deletedItem }) => {
   };
 
   return (
-    <div className='main-payment'>
-      <h3>Pagamento</h3>
+    <div className="container main-payment">
+    <h3>Pagamento</h3>
+    <div className="form-group">
       <label>Descrição</label>
       {deletedItem && (
-        <textarea readOnly value={deletedItem.descricao || ''} />
+        <textarea className="form-control" readOnly value={deletedItem.descricao || ''} />
       )}
+    </div>
+    <div className="form-group">
       <label>Placa</label>
       {deletedItem && (
-        <textarea readOnly value={deletedItem.placa || ''} />
+        <textarea className="form-control" readOnly value={deletedItem.placa || ''} />
       )}
+    </div>
+    <div className="form-group">
       <label>Tipo</label>
       {deletedItem && (
-        <textarea readOnly value={deletedItem.tipo || ''} />
+        <textarea className="form-control" readOnly value={deletedItem.tipo || ''} />
       )}
+    </div>
+    <div className="form-group">
       <label>Tipo Cliente</label>
       {deletedItem && (
-        <textarea readOnly value={deletedItem.tipocli || ''} />
+        <textarea className="form-control" readOnly value={deletedItem.tipocli || ''} />
       )}
+    </div>
+    <div className="form-group">
       <label>Entrada</label>
       {deletedItem && (
-        <input readOnly value={deletedItem.entrada || ''} />
+        <input className="form-control" readOnly value={deletedItem.entrada || ''} />
       )}
-      <label>Saída</label>
-      <input type="datetime-local" onChange={(e) => setSaida(e.target.value)} />
-
-      <label>Valor a ser pago</label>
-      <p>R${valor.toFixed(2)}</p>
-      <button onClick={handleCal}>Calcular</button>
-      <button onClick={()=>{window.location.reload()}}>Gerar Boleto</button>  
     </div>
+    <div className="form-group">
+      <label>Saída</label>
+      <input className="form-control-saida" type="datetime-local" onChange={(e) => setSaida(e.target.value)} />
+    </div>
+    <div className="form-group">
+      <label>Valor a ser pago</label>
+      <p className="form-control-static">R${valor.toFixed(2)}</p>
+    </div>
+    <button className="btn btn-primary" onClick={handleCal}>Calcular</button>
+    <button className="btn btn-secondary" onClick={() => { window.location.reload() }}>Gerar Boleto</button>
+  </div>
   );
 };
 

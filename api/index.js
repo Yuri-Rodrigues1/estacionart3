@@ -7,10 +7,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-export const db = mysql.createConnection({
+export const db = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "123456",
+    password: "root",
     database: "estacion",
 });
 
