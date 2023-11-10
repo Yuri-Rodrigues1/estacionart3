@@ -9,35 +9,35 @@ const Payment = ({ deletedItem }) => {
   const handleCal = () => {
     const entrada = new Date(deletedItem.entrada);
     const saidaValue = new Date(saida);
-    const timeDifference = (saidaValue - entrada) / (1000 * 60 * 60); // fazer o calculo da diferença em horas
+    const timeDifference = (saidaValue - entrada) / (1000 * 60 * 60); // calcular a diferença em horas
 
     let valorFinal = 0;
 
     if (timeDifference >= 1) {
-      // verificando o tipo do cliente 
-      if(deletedItem.tipocli === 1){
-        // verificando o tipo do veículo
-        if (deletedItem.tipo === 1) {
-          valorFinal = timeDifference * 15;
-        } else if (deletedItem.tipo === 2) {
-          valorFinal = timeDifference * 20;
-        }
+      if (deletedItem.tipocli === 1) {
+        // Cliente horista
+        const minutosUsados = timeDifference * 60;
+        
+        // Cada 15 minutos custa R$ 5
+        const valorPor15Min = 5;
+        const valorPorHora = 20;
+
+        valorFinal = Math.ceil(minutosUsados / 15) * valorPor15Min;
+        valorFinal += Math.floor(timeDifference) * valorPorHora;
+      } else if (deletedItem.tipocli === 2) {
+        // Cliente diária
+        const valorPorDia = 50;
+        valorFinal = Math.ceil(timeDifference / 24) * valorPorDia;
+      } else if (deletedItem.tipocli === 3) {
+        // Cliente mensalista
+        const valorPadrao = 250;
+        valorFinal = valorPadrao;
       }
-    }else if(deletedItem.tipocli === 2){
-      if (deletedItem.tipo === 1) {
-        valorFinal = 50;
-      } else if (deletedItem.tipo === 2) {
-        valorFinal = 75
-      }
-    }else if(deletedItem.tipocli === 3){
-      if (deletedItem.tipo === 1) {
-        valorFinal = 200
-      } else if (deletedItem.tipo === 2) {
-        valorFinal = 250
-      }
-    } 
+    }
+
     setValor(valorFinal);
   };
+
 
   return (
     <div className="container main-payment">
