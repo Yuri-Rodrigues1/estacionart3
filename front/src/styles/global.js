@@ -1,20 +1,23 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
-const Global = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
+  body.modal-open {
+    overflow: hidden;
+  }
 
- * {
-   margin: 0;
-   padding: 0;
-   font-family: 'poppins', sans-serif;
- }
-
- body {
-   width: 100vw;
-   height: 100vh;
-   display: flex;
-   justify-content: center;
-   background-color: #f5f5f5;
- }
+  .modal-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60%; /* Ajuste conforme necessário */
+    height: 60%; /* Ajuste conforme necessário */
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ajuste conforme necessário */
+  }
 `;
 
-export default Global;
+export default GlobalStyle;

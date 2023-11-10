@@ -14,6 +14,7 @@ const FormContainer = styled.form`
   border-radius: 5px;
 `;
 
+
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,12 +38,19 @@ const Button = styled.button`
   background-color: #2c73d2;
   color: white;
   height: 40px;
+  margin-top: 30px;
 `;
 
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
   const [selectedTipo, setSelectedTipo] = useState('');
-  const [selectedTipocli, setSelectedTipocli] = useState(''); // Estado para armazenar a opção de "tipo" selecionada
+  const [selectedTipocli, setSelectedTipocli] = useState('');
+  const [placa, setPlaca] = useState('')
+
+  const handlePlaca = (event) => {
+    const value = event.target.value;
+    setPlaca(value.toUpperCase());
+  };
 
   useEffect(() => {
     if (onEdit) {
@@ -109,7 +117,7 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label>Placa</Label>
-        <Input name="placa" />
+        <Input placeholder="xxx-xxxx"name="placa" value={placa} onChange={handlePlaca} maxLength={7}/>
       </InputArea>
       <InputArea>
         <Label>Descrição</Label>

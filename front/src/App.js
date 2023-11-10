@@ -7,6 +7,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Payment from "./components/Payment/Payment";
+import Navbar from "./components/navbar/Navbar.js";
+
+
 
 const AppContainer = styled.div`
   display: flex;
@@ -17,7 +20,6 @@ const AppContainer = styled.div`
 
 const Container = styled.div`
   width: 170%;
-  max-width: 800px;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -32,6 +34,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [onEdit, setOnEdit] = useState(null);
   const [deletedItem, setDeletedItem] = useState(null);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
 
   const getUsers = async () => {
     try {
@@ -48,8 +51,19 @@ function App() {
 
   const availableVagas = 100 - users.length;
 
+  const openPaymentModal = () => {
+    setPaymentModalOpen(true);
+    document.body.classList.add('modal-open');
+  };
+
+  const closePaymentModal = () => {
+    setPaymentModalOpen(false);
+    document.body.classList.remove('modal-open');
+  };
+
   return (
     <>
+      <Navbar/>
       <AppContainer>
         <Container>
           <Title>E s t a c i o n a r t e</Title>
@@ -61,11 +75,18 @@ function App() {
             setUsers={setUsers}
             setDeletedItem={setDeletedItem}
             deletedItem={deletedItem}
+            openPaymentModal={openPaymentModal}
           />
         </Container>
-        <ToastContainer autoClose={1000} position={toast.POSITION.BOTTOM_LEFT} />
-        <Payment deletedItem={deletedItem} />
       </AppContainer>
+      {paymentModalOpen && (
+        <div className="modal-overlay">
+          <Payment deletedItem={deletedItem} />
+          {/* Adicione um botão ou função para fechar o modal */}
+          <button onClick={closePaymentModal}>Fechar</button>
+        </div>
+      )}
+      <ToastContainer autoClose={1000} position={toast.POSITION.BOTTOM_LEFT} />
       <GlobalStyle />
     </>
   );

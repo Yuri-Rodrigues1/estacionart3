@@ -41,48 +41,48 @@ const Payment = ({ deletedItem }) => {
 
   return (
     <div className="container main-payment">
-    <h3>Pagamento</h3>
-    <div className="form-group">
-      <label>Descrição</label>
-      {deletedItem && (
-        <textarea className="form-control" readOnly value={deletedItem.descricao || ''} />
-      )}
+      <h3>Pagamento</h3>
+      <div className="form-group">
+        <label>Descrição</label>
+        {deletedItem && (
+          <textarea className="form-control" readOnly value={deletedItem.descricao || ''} />
+        )}
+      </div>
+      <div className="form-group">
+        <label>Placa</label>
+        {deletedItem && (
+          <textarea className="form-control" readOnly value={deletedItem.placa || ''} />
+        )}
+      </div>
+      <div className="form-group">
+        <label>Tipo</label>
+        {deletedItem && (
+          <textarea className="form-control" readOnly value={deletedItem.tipo || ''} />
+        )}
+      </div>
+      <div className="form-group">
+        <label>Tipo Cliente</label>
+        {deletedItem && (
+          <textarea className="form-control" readOnly value={deletedItem.tipocli || ''} />
+        )}
+      </div>
+      <div className="form-group">
+        <label>Entrada</label>
+        {deletedItem && (
+          <input className="form-control" readOnly value={deletedItem.entrada || ''} />
+        )}
+      </div>
+      <div className="form-group">
+        <label>Saída</label>
+        <input className="form-control" type="datetime-local" onChange={(e) => setSaida(e.target.value)} />
+      </div>
+      <div className="form-group">
+        <label>Valor a ser pago</label>
+        <p className="form-control-static">R${valor.toFixed(2)}</p>
+      </div>
+      <button className="btn btn-primary" onClick={handleCal}>Calcular</button>
+      <button className="btn btn-secondary" onClick={() => { window.location.reload() }}>Gerar Boleto</button>
     </div>
-    <div className="form-group">
-      <label>Placa</label>
-      {deletedItem && (
-        <textarea className="form-control" readOnly value={deletedItem.placa || ''} />
-      )}
-    </div>
-    <div className="form-group">
-      <label>Tipo</label>
-      {deletedItem && (
-        <textarea className="form-control" readOnly value={deletedItem.tipo || ''} />
-      )}
-    </div>
-    <div className="form-group">
-      <label>Tipo Cliente</label>
-      {deletedItem && (
-        <textarea className="form-control" readOnly value={deletedItem.tipocli || ''} />
-      )}
-    </div>
-    <div className="form-group">
-      <label>Entrada</label>
-      {deletedItem && (
-        <input className="form-control" readOnly value={deletedItem.entrada || ''} />
-      )}
-    </div>
-    <div className="form-group">
-      <label>Saída</label>
-      <input className="form-control-saida" type="datetime-local" onChange={(e) => setSaida(e.target.value)} />
-    </div>
-    <div className="form-group">
-      <label>Valor a ser pago</label>
-      <p className="form-control-static">R${valor.toFixed(2)}</p>
-    </div>
-    <button className="btn btn-primary" onClick={handleCal}>Calcular</button>
-    <button className="btn btn-secondary" onClick={() => { window.location.reload() }}>Gerar Boleto</button>
-  </div>
   );
 };
 

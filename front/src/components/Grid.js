@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { FaCalculator, FaEdit } from "react-icons/fa";
@@ -33,7 +33,7 @@ export const Td = styled.td`
   width: ${(props) => (props.width ? props.width : "auto")};
 `;
 
-const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, deletedItem }) => {
+const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, deletedItem, openPaymentModal }) => {
   const handleEdit = (item) => {
     setOnEdit(item);
   };
@@ -46,7 +46,7 @@ const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, deletedItem }) => {
       setUsers(newArray);
       toast.success(response.data, console.log(item));
       setDeletedItem(item);
-      console.log(deletedItem.descricao)
+      openPaymentModal(); // Chame a função para abrir o modal Payment
     } catch (error) {
       toast.error(error.message);
     }
