@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <div className="container">
-      <div className="login-container col-md-6 offset-md-3">
+
         <h1 className="text-center">Login</h1>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -63,6 +63,6 @@ export default function Login() {
           </Form>
         </Formik>
       </div>
-    </div>
+
   )
 }

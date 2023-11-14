@@ -46,7 +46,7 @@ function Cadastro() {
   
         <div class="button-group">
           <button class="btn btn-success" type="submit">Criar</button>
-          <a href="#" class="btn btn-danger">Voltar</a>
+          <a href="/" class="btn btn-danger">Voltar</a>
         </div>
       </Form>
     </Formik>
