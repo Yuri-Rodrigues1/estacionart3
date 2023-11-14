@@ -5,6 +5,6 @@ export default function App() {
   return (
     <div>
       <Rotas/>
-    </div>
+    </div>//mudado pela Ana
   )
 }
