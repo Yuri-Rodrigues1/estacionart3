@@ -2,7 +2,6 @@ import mysql from 'mysql2';
 import express from 'express';
 import cors from 'cors';
 
-
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -18,18 +17,19 @@ import {
   getUsers,
   addUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  login,
+  cadastro
 } from "./control/user.js";
 
-app.use("/", (req, res, next) => {
-    const router = express.Router();
 
-    router.get("/", getUsers);
-    router.post("/", addUser);
-    router.put("/:idVei", updateUser);
-    router.delete("/:idVei", deleteUser);
-    
-    router(req, res, next);
+app.get("/", getUsers);
+app.post("/", addUser);
+app.put("/:idVei", updateUser);
+app.delete("/:idVei", deleteUser);
+app.post("/login", login);
+app.post("/cadastro", cadastro);
+
+app.listen(3000, () => {
+  console.log("Servidor está rodando na porta 3000");
 });
-
-app.listen(3000);
