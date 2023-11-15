@@ -79,7 +79,7 @@ export const login = (req, res) => {
         res.send(err);
       }
       if (result.length > 0) {
-        res.send({ msg: "Usuário logado com sucesso" });
+        res.send({ msg: "Usuário logado com sucesso", redirectTo: "http://localhost:3001/inicio" });
       } else {
         res.send({ msg: "Usuário não encontrado" });
       }

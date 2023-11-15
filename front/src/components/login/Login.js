@@ -12,6 +12,9 @@ export default function Login() {
       password: values.password,
     }).then((response) => {
       console.log(response);
+      if (response.data.redirectTo) {
+        window.location.href = response.data.redirectTo;
+      }
     });
   };
 
