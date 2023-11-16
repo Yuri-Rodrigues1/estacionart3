@@ -11,7 +11,6 @@ import Payment from "../Payment/Payment";
 import Navbar from "../navbar/Navbar";
 
 
-
 const AppContainer = styled.div`
   display: flex;
   flex-wrap: wrap;

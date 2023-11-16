@@ -24,6 +24,7 @@ export default function Login() {
   });
 
   return (
+    <div className='body-login'>
     <div className="container">
       <h1 className="text-center">Login</h1>
       <Formik
@@ -62,6 +63,7 @@ export default function Login() {
           </Link>
         </Form>
       </Formik>
+    </div>
     </div>
   );
 }

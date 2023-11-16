@@ -1,94 +1,10 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .container {
-    max-width: 400px;
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-    color: #343a40;
-  }
-  
-  .cadastro-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    font-size: 14px;
-    color: #495057;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    transition: border-color 0.2s ease-in-out;
-  }
-  
-  .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-  
-  .form-error {
-    color: #dc3545;
-    margin-top: 5px;
-  }
-  
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .btn {
-    flex: 48%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    color: #fff;
-    margin-right: 5px; /* Adicionei um pequeno espaço entre os botões */
-    border: 1px solid #218838; /* Adicionei borda ao botão "Criar" */
-  }
-  
-  .btn-success:hover {
-    background-color: #218838;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border: 1px solid #c82333; /* Adicionei borda ao botão "Voltar" */
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
+.container-cadastro{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden; /* opcional: remova barras de rolagem */
+}

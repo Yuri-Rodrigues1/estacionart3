@@ -22,6 +22,7 @@ function Cadastro() {
   });
 
   return (
+    <div className='container-cadastro'>
     <div className="container">
       <h1>Cadastro</h1>
       <Formik initialValues={{}} onSubmit={handleClickCadastro} validationSchema={validationCadastro}>
@@ -45,6 +46,7 @@ function Cadastro() {
           <Link to="/" className='btn btn-danger'>Voltar</Link>
         </Form>
       </Formik>
+    </div>
     </div>
   );
 }

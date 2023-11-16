@@ -16,26 +16,31 @@ const Payment = ({ deletedItem }) => {
     if (timeDifference >= 1) {
       if (deletedItem.tipocli === 1) {
         // Cliente horista
-        const minutosUsados = timeDifference * 60;
-        
-        // Cada 15 minutos custa R$ 5
-        const valorPor15Min = 5;
-        const valorPorHora = 20;
+        const minutosUsados = Math.ceil(timeDifference * 60);
 
-        valorFinal = Math.ceil(minutosUsados / 15) * valorPor15Min;
-        valorFinal += Math.floor(timeDifference) * valorPorHora;
+    // Cada hora custa R$ 10
+        const valorPorHora = 10;
+
+    // Cobrar 10 reais para cada hora ou fração de hora
+        valorFinal = Math.ceil(minutosUsados / 60) * valorPorHora;
       } else if (deletedItem.tipocli === 2) {
         // Cliente diária
-        const valorPorDia = 50;
-        valorFinal = Math.ceil(timeDifference / 24) * valorPorDia;
+        const valorPorDia = 35;
+        valorFinal = 35
+        if(Math.ceil(timeDifference / 24) > 0){
+          valorFinal = Math.ceil(timeDifference / 24) * valorPorDia;
+          console.log(Math.ceil(timeDifference / 24))
+        }
+
       } else if (deletedItem.tipocli === 3) {
         // Cliente mensalista
-        const valorPadrao = 250;
-        valorFinal = valorPadrao;
+        const valorPorMes = 250;
+        valorFinal = Math.ceil(timeDifference / (24 * 30)) * valorPorMes; // Assumindo um mês com 30 dias
       }
     }
 
     setValor(valorFinal);
+   
   };
 
 
