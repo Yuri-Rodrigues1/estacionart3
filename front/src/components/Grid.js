@@ -33,20 +33,16 @@ export const Td = styled.td`
   width: ${(props) => (props.width ? props.width : "auto")};
 `;
 
-const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, deletedItem, openPaymentModal }) => {
+const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal }) => {
   const handleEdit = (item) => {
     setOnEdit(item);
   };
 
   const handleDelete = async (item) => {
     try {
-      const response = await axios.delete("http://localhost:3000/" + item.idVei);
-      const newArray = users.filter((user) => user.idVei !== item.idVei);
-
-      setUsers(newArray);
-      toast.success(response.data, console.log(item));
+  
       setDeletedItem(item);
-      openPaymentModal(); // Chame a função para abrir o modal Payment
+      openPaymentModal();
     } catch (error) {
       toast.error(error.message);
     }

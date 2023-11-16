@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Payment/Payment.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
 
-const Payment = ({ deletedItem }) => {
+const Payment = ({ deletedItem, shouldRemoveItem, setShouldRemoveItem }) => {
   const [saida, setSaida] = useState('');
   const [valor, setValor] = useState(0);
+
+  useEffect(() => {
+  
+    if (shouldRemoveItem) {
+  
+      setShouldRemoveItem(false);
+    }
+  }, [shouldRemoveItem, setShouldRemoveItem]);
 
   const handleCal = () => {
     const entrada = new Date(deletedItem.entrada);
@@ -17,32 +26,37 @@ const Payment = ({ deletedItem }) => {
       if (deletedItem.tipocli === 1) {
         // Cliente horista
         const minutosUsados = Math.ceil(timeDifference * 60);
-
-    // Cada hora custa R$ 10
         const valorPorHora = 10;
-
-    // Cobrar 10 reais para cada hora ou fração de hora
         valorFinal = Math.ceil(minutosUsados / 60) * valorPorHora;
       } else if (deletedItem.tipocli === 2) {
         // Cliente diária
         const valorPorDia = 35;
-        valorFinal = 35
-        if(Math.ceil(timeDifference / 24) > 0){
+        valorFinal = 35;
+        if (Math.ceil(timeDifference / 24) > 0) {
           valorFinal = Math.ceil(timeDifference / 24) * valorPorDia;
-          console.log(Math.ceil(timeDifference / 24))
         }
-
       } else if (deletedItem.tipocli === 3) {
         // Cliente mensalista
         const valorPorMes = 250;
-        valorFinal = Math.ceil(timeDifference / (24 * 30)) * valorPorMes; // Assumindo um mês com 30 dias
+        valorFinal = Math.ceil(timeDifference / (24 * 30)) * valorPorMes;
       }
     }
 
     setValor(valorFinal);
-   
   };
 
+  const handleGenerateBoleto = async () => {
+    try {
+  
+      if (deletedItem) {
+        await axios.delete(`http://localhost:3000/${deletedItem.idVei}`);
+        setShouldRemoveItem(true); 
+        window.location.reload()
+      }
+    } catch (error) {
+      console.error("Erro ao gerar boleto ou excluir item:", error);
+    }
+  };
 
   return (
     <div className="container main-payment">
@@ -86,9 +100,14 @@ const Payment = ({ deletedItem }) => {
         <p className="form-control-static">R${valor.toFixed(2)}</p>
       </div>
       <button className="btn btn-primary" onClick={handleCal}>Calcular</button>
-      <button className="btn btn-secondary" onClick={() => { window.location.reload() }}>Gerar Boleto</button>
+      {deletedItem && (
+        <button className="btn btn-secondary" onClick={handleGenerateBoleto}>
+          Gerar Boleto
+        </button>
+      )}
     </div>
   );
 };
 
 export default Payment;
+ 

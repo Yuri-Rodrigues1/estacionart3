@@ -1,5 +1,4 @@
 import GlobalStyle from "../../styles/global";
-
 import styled from "styled-components";
 import Form from "../Form";
 import Grid from "../Grid";
@@ -9,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Payment from "../Payment/Payment";
 import Navbar from "../navbar/Navbar";
-
 
 const AppContainer = styled.div`
   display: flex;
@@ -35,6 +33,7 @@ function App() {
   const [onEdit, setOnEdit] = useState(null);
   const [deletedItem, setDeletedItem] = useState(null);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
+  const [shouldRemoveItem, setShouldRemoveItem] = useState(false);
 
   const getUsers = async () => {
     try {
@@ -59,11 +58,20 @@ function App() {
   const closePaymentModal = () => {
     setPaymentModalOpen(false);
     document.body.classList.remove('modal-open');
+
+    // Verifica se shouldRemoveItem é true antes de remover o item
+    if (shouldRemoveItem && deletedItem) {
+      const newArray = users.filter((user) => user.idVei !== deletedItem.idVei);
+      setUsers(newArray);
+      setDeletedItem(null); // Define deletedItem como null ao fechar a modal
+    }
+
+    setShouldRemoveItem(false); // Reseta shouldRemoveItem para false
   };
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <AppContainer>
         <Container>
           <Title>E s t a c i o n a r t e</Title>
@@ -76,13 +84,13 @@ function App() {
             setDeletedItem={setDeletedItem}
             deletedItem={deletedItem}
             openPaymentModal={openPaymentModal}
+            setShouldRemoveItem={setShouldRemoveItem}
           />
         </Container>
       </AppContainer>
       {paymentModalOpen && (
         <div className="modal-overlay">
-          <Payment deletedItem={deletedItem} />
-          {/* Adicione um botão ou função para fechar o modal */}
+          <Payment deletedItem={deletedItem} shouldRemoveItem={shouldRemoveItem} setShouldRemoveItem={setShouldRemoveItem}/>
           <button onClick={closePaymentModal}>Fechar</button>
         </div>
       )}
