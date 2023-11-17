@@ -59,14 +59,13 @@ function App() {
     setPaymentModalOpen(false);
     document.body.classList.remove('modal-open');
 
-    // Verifica se shouldRemoveItem é true antes de remover o item
     if (shouldRemoveItem && deletedItem) {
       const newArray = users.filter((user) => user.idVei !== deletedItem.idVei);
       setUsers(newArray);
-      setDeletedItem(null); // Define deletedItem como null ao fechar a modal
+      setDeletedItem(null);
     }
 
-    setShouldRemoveItem(false); // Reseta shouldRemoveItem para false
+    setShouldRemoveItem(false);
   };
 
   return (

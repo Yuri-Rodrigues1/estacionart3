@@ -14,7 +14,6 @@ const FormContainer = styled.form`
   border-radius: 5px;
 `;
 
-
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,11 +40,22 @@ const Button = styled.button`
   margin-top: 30px;
 `;
 
+const formattedDate = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 const Form = ({ getUsers, onEdit, setOnEdit }) => {
   const ref = useRef();
-  const [selectedTipo, setSelectedTipo] = useState('');
-  const [selectedTipocli, setSelectedTipocli] = useState('');
-  const [placa, setPlaca] = useState('')
+  const [selectedTipo, setSelectedTipo] = useState("");
+  const [selectedTipocli, setSelectedTipocli] = useState("");
+  const [placa, setPlaca] = useState("");
 
   const handlePlaca = (event) => {
     const value = event.target.value;
@@ -56,11 +66,11 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     if (onEdit) {
       const user = ref.current;
 
-      user.placa.value = onEdit.placa;
+      setPlaca(onEdit.placa);
       user.descricao.value = onEdit.descricao;
-      user.entrada.value = onEdit.entrada;
+      user.entrada.value = formattedDate(onEdit.entrada);
       setSelectedTipo(onEdit.tipo);
-      setSelectedTipocli(onEdit.tipocli); 
+      setSelectedTipocli(onEdit.tipocli);
     }
   }, [onEdit]);
 
@@ -79,14 +89,16 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       return toast.warn("Preencha todos os campos!");
     }
 
+    const formattedEntryDate = formattedDate(user.entrada.value);
+
     if (onEdit) {
       await axios
-        .put("http://localhost:3000/" + onEdit.idVei, {
+        .put(`http://localhost:3000/${onEdit.idVei}`, {
           placa: user.placa.value,
           descricao: user.descricao.value,
-          entrada: user.entrada.value,
-          tipo: selectedTipo, 
-          tipocli: selectedTipocli
+          entrada: formattedEntryDate,
+          tipo: selectedTipo,
+          tipocli: selectedTipocli,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -95,9 +107,9 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         .post("http://localhost:3000", {
           placa: user.placa.value,
           descricao: user.descricao.value,
-          entrada: user.entrada.value,
-          tipo: selectedTipo, 
-          tipocli: selectedTipocli
+          entrada: formattedEntryDate,
+          tipo: selectedTipo,
+          tipocli: selectedTipocli,
         })
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
@@ -106,8 +118,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     user.placa.value = "";
     user.descricao.value = "";
     user.entrada.value = "";
-    setSelectedTipo(''); 
-    setSelectedTipocli('');
+    setSelectedTipo("");
+    setSelectedTipocli("");
 
     setOnEdit(null);
     getUsers();
@@ -117,7 +129,13 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label>Placa</Label>
-        <Input placeholder="xxx-xxxx"name="placa" value={placa} onChange={handlePlaca} maxLength={7}/>
+        <Input
+          placeholder="xxx-xxxx"
+          name="placa"
+          value={placa}
+          onChange={handlePlaca}
+          maxLength={7}
+        />
       </InputArea>
       <InputArea>
         <Label>Descrição</Label>
@@ -130,7 +148,10 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
 
       <InputArea>
         <Label>Tipo</Label>
-        <select value={selectedTipo} onChange={(e) => setSelectedTipo(e.target.value)}>
+        <select
+          value={selectedTipo}
+          onChange={(e) => setSelectedTipo(e.target.value)}
+        >
           <option value="">Selecione...</option>
           <option value="1">Moto</option>
           <option value="2">Carro</option>
@@ -138,7 +159,10 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
       </InputArea>
       <InputArea>
         <Label>Tipo Cli</Label>
-        <select value={selectedTipocli} onChange={(e)=> setSelectedTipocli(e.target.value)}>
+        <select
+          value={selectedTipocli}
+          onChange={(e) => setSelectedTipocli(e.target.value)}
+        >
           <option value="">Selecione...</option>
           <option value="1">Hora</option>
           <option value="2">Diaria</option>

@@ -33,14 +33,14 @@ export const Td = styled.td`
   width: ${(props) => (props.width ? props.width : "auto")};
 `;
 
-const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal }) => {
+const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal, setShouldRemoveItem }) => {
   const handleEdit = (item) => {
+    console.log("Editando item:", item);
     setOnEdit(item);
   };
 
   const handleDelete = async (item) => {
     try {
-  
       setDeletedItem(item);
       openPaymentModal();
     } catch (error) {

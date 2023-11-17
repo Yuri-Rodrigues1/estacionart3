@@ -32,22 +32,22 @@ export const addUser = (req, res) => {
 };
 
 export const updateUser = (req, res) => {
-    const q =
-        "UPDATE cad_veiculos SET `placa` = ?, `descricao` = ?, `entrada` = ?, `tipo` = ?, `tipocli` WHERE `idVei` = ?";
+  const q =
+  "UPDATE cad_veiculos SET `placa` = ?, `descricao` = ?, `entrada` = ?, `tipo` = ?, `tipocli` = ? WHERE `idVei` = ?";
 
-    const values = [
-        req.body.placa,
-        req.body.descricao,
-        req.body.entrada,
-        req.body.tipo,
-        req.body.tipocli
-    ];
+const values = [
+  req.body.placa,
+  req.body.descricao,
+  new Date(req.body.entrada), // Converter a entrada para um objeto Date
+  req.body.tipo,
+  req.body.tipocli
+];
 
-    db.query(q, [...values, req.params.idVei], (err) => {
-        if (err) return res.json(err);
+db.query(q, [...values, req.params.idVei], (err) => {
+  if (err) return res.json(err);
 
-        return res.status(200).json("Veículo Atualizado.");
-    })
+  return res.status(200).json("Veículo Atualizado.");
+})
 };
 
 export const deleteUser = (req, res) => {
