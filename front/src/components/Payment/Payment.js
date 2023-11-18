@@ -19,15 +19,15 @@ const Payment = ({ deletedItem, shouldRemoveItem, setShouldRemoveItem }) => {
     const entrada = new Date(deletedItem.entrada);
     const saidaValue = new Date(saida);
     const timeDifference = (saidaValue - entrada) / (1000 * 60 * 60); // calcular a diferença em horas
-
+  
     let valorFinal = 0;
-
+  
     if (timeDifference >= 1) {
       if (deletedItem.tipocli === 1) {
         // Cliente horista
         const minutosUsados = Math.ceil(timeDifference * 60);
         const valorPorHora = 10;
-        valorFinal = Math.ceil(minutosUsados / 60) * valorPorHora;
+        valorFinal = (Math.ceil(minutosUsados / 60) * valorPorHora)-10;
       } else if (deletedItem.tipocli === 2) {
         // Cliente diária
         const valorPorDia = 35;
@@ -38,10 +38,10 @@ const Payment = ({ deletedItem, shouldRemoveItem, setShouldRemoveItem }) => {
       } else if (deletedItem.tipocli === 3) {
         // Cliente mensalista
         const valorPorMes = 250;
-        valorFinal = Math.ceil(timeDifference / (24 * 30)) * valorPorMes;
+        valorFinal = (Math.ceil(timeDifference / (24 * 30)) * valorPorMes)-250;
       }
     }
-
+  
     setValor(valorFinal);
   };
 
