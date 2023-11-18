@@ -5,11 +5,6 @@ import './Navbar.css';
 
 Modal.setAppElement("#root");
 
-
-Modal.setAppElement('#root');
-
-
-
 function Navbar() {
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -66,7 +61,6 @@ function Navbar() {
 
             </table>
             </div>
-            
            
           </p>
           <button onClick={closeModal}>Fechar</button>
