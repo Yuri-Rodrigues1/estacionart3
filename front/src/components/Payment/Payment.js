@@ -23,22 +23,56 @@ const Payment = ({ deletedItem, shouldRemoveItem, setShouldRemoveItem }) => {
     let valorFinal = 0;
   
     if (timeDifference >= 1) {
+      const valorPorHoraCarro = 10;
+      const valorPorHoraMoto = 6;
+      const minutosUsados = Math.ceil(timeDifference * 60);
       if (deletedItem.tipocli === 1) {
         // Cliente horista
-        const minutosUsados = Math.ceil(timeDifference * 60);
-        const valorPorHora = 10;
-        valorFinal = (Math.ceil(minutosUsados / 60) * valorPorHora)-10;
+        if(deletedItem.tipo === 1){
+          valorFinal = (Math.ceil(minutosUsados / 60) * valorPorHoraMoto)-6;
+        }
+        else if(deletedItem.tipo === 2){
+          valorFinal = (Math.ceil(minutosUsados / 60) * valorPorHoraCarro)-10;
+        }
+        
       } else if (deletedItem.tipocli === 2) {
         // Cliente diária
-        const valorPorDia = 35;
-        valorFinal = 35;
-        if (Math.ceil(timeDifference / 24) > 0) {
-          valorFinal = Math.ceil(timeDifference / 24) * valorPorDia;
+        const valorPorDiaCarro = 35;
+        const valorPorDiaMoto = 25;
+        
+
+        if(deletedItem.tipo === 1){
+          if (Math.ceil(timeDifference / 24) > 0) {
+            valorFinal = Math.ceil(timeDifference / 24) * valorPorDiaMoto;
+          }
         }
+        else if(deletedItem.tipo === 2){
+          if (Math.ceil(timeDifference / 24) > 0) {
+            valorFinal = Math.ceil(timeDifference / 24) * valorPorDiaCarro;
+          }
+        }
+       
+
       } else if (deletedItem.tipocli === 3) {
         // Cliente mensalista
-        const valorPorMes = 250;
-        valorFinal = (Math.ceil(timeDifference / (24 * 30)) * valorPorMes)-250;
+        const valorPorMesCarro = 250;
+        const valorPorMesMoto = 150;
+
+        if((Math.ceil(timeDifference / (24 * 30))) === 1){
+          if(deletedItem.tipo === 1){
+            valorFinal = 150
+          }else{
+            valorFinal = 250
+          }
+        }
+
+        if(deletedItem.tipo === 1){
+          valorFinal = (Math.ceil(timeDifference / (24 * 30)) * valorPorMesMoto);
+        }
+        else if(deletedItem.tipo === 2){
+          valorFinal = (Math.ceil(timeDifference / (24 * 30)) * valorPorMesCarro);
+        }
+      
       }
     }
   
