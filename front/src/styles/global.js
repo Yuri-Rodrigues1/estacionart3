@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
     left: 50%;
     width: 60%; /* Ajuste conforme necessário */
     height: 60%; /* Ajuste conforme necessário */
-    background: rgba(0, 0, 0, 0.5);
+   
     display: flex;
     align-items: center;
     justify-content: center;

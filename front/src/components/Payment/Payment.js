@@ -64,25 +64,25 @@ const Payment = ({ deletedItem, shouldRemoveItem, setShouldRemoveItem }) => {
       <div className="form-group">
         <label>Descrição</label>
         {deletedItem && (
-          <textarea className="form-control" readOnly value={deletedItem.descricao || ''} />
+          <input className="form-control" readOnly value={deletedItem.descricao || ''} />
         )}
       </div>
       <div className="form-group">
         <label>Placa</label>
         {deletedItem && (
-          <textarea className="form-control" readOnly value={deletedItem.placa || ''} />
+          <input className="form-control" readOnly value={deletedItem.placa || ''} />
         )}
       </div>
       <div className="form-group">
         <label>Tipo</label>
         {deletedItem && (
-          <textarea className="form-control" readOnly value={deletedItem.tipo || ''} />
+          <input className="form-control" readOnly value={deletedItem.tipo || ''} />
         )}
       </div>
       <div className="form-group">
         <label>Tipo Cliente</label>
         {deletedItem && (
-          <textarea className="form-control" readOnly value={deletedItem.tipocli || ''} />
+          <input className="form-control" readOnly value={deletedItem.tipocli || ''} />
         )}
       </div>
       <div className="form-group">
