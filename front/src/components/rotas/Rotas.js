@@ -4,6 +4,7 @@ import Inicio from '../inicio/Inicio'
 import Login from '../login/Login'
 import Cadastro from '../login/Cadastro'
 import Ocorrencias from '../ocorrencias/Ocorrencias'
+import Historico from '../historico.js/Historico'
 
 function Rotas() {
   return (
@@ -13,6 +14,7 @@ function Rotas() {
         <Route path='/inicio' element={<Inicio />} />
         <Route path='/cadastro' element={<Cadastro />} />
         <Route path='/ocorrencias' element={<Ocorrencias />} />
+        <Route path='/historico' element={<Historico/>}></Route>
       </Routes>
     </BrowserRouter>
   )

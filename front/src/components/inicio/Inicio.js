@@ -60,13 +60,24 @@ function App() {
     document.body.classList.remove('modal-open');
 
     if (shouldRemoveItem && deletedItem) {
-      const newArray = users.filter((user) => user.idVei !== deletedItem.idVei);
-      setUsers(newArray);
-      setDeletedItem(null);
+        const newArray = users.filter((user) => user.idVei !== deletedItem.idVei);
+        setUsers(newArray);
+
+        // Adicione o veículo removido ao histórico
+        axios.post("http://localhost:3000/ocorrencias", {
+            data: deletedItem.entrada,
+            observacao: `Veículo removido - Placa: ${deletedItem.placa}`,
+        }).then(() => {
+            console.log("Veículo movido para o histórico");
+        }).catch((error) => {
+            console.error("Erro ao mover veículo para o histórico:", error);
+        });
+
+        setDeletedItem(null);
     }
 
     setShouldRemoveItem(false);
-  };
+};
 
   return (
     <>

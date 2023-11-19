@@ -23,7 +23,8 @@ import {
     getOcorrencias,
     addOcorrencia,
     updateOcorrencia,
-    deleteOcorrencia
+    deleteOcorrencia,
+    getHistorico
 } from "./control/user.js";
 
 app.get("/", getUsers);
@@ -32,12 +33,11 @@ app.put("/:idVei", updateUser);
 app.delete("/:idVei", deleteUser);
 app.post("/login", login);
 app.post("/cadastro", cadastro);
-
-// Rotas corrigidas para ocorrencias
 app.get("/ocorrencias", getOcorrencias);
 app.post("/ocorrencias", addOcorrencia);
 app.put("/ocorrencias/:id", updateOcorrencia);
 app.delete("/ocorrencias/:id", deleteOcorrencia);
+app.get("/historico", getHistorico );
 
 app.listen(3000, () => {
     console.log("Servidor está rodando na porta 3000");

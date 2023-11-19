@@ -51,20 +51,43 @@ db.query(q, [...values, req.params.idVei], (err) => {
 };
 
 export const deleteUser = (req, res) => {
-    const q = "DELETE FROM cad_veiculos WHERE `idVei` = ?";
+  const qSelect = "SELECT * FROM cad_veiculos WHERE `idVei` = ?";
+  const qDelete = "DELETE FROM cad_veiculos WHERE `idVei` = ?";
+  const qInsertHistorico = "INSERT INTO historico (placa, descricao, entrada, tipo, tipocli, data_saida) VALUES (?, ?, ?, ?, ?, NOW())";
 
-    db.query(q, [req.params.idVei], (err, result) => {
-        if (err) {
-            return res.json(err);
-        }
+  db.query(qSelect, [req.params.idVei], (err, result) => {
+      if (err) {
+          return res.json(err);
+      }
 
-        if (result.affectedRows === 0) {
-            return res.status(404).json("Veículo não encontrado");
-        }
+      if (result.length === 0) {
+          return res.status(404).json("Veículo não encontrado");
+      }
 
-        return res.status(200).json("Veículo Excluído.");
-    });
+      const veiculoRemovido = result[0];
+
+      db.query(qDelete, [req.params.idVei], (errDelete) => {
+          if (errDelete) {
+              return res.json(errDelete);
+          }
+
+          db.query(qInsertHistorico, [
+              veiculoRemovido.placa,
+              veiculoRemovido.descricao,
+              veiculoRemovido.entrada,
+              veiculoRemovido.tipo,
+              veiculoRemovido.tipocli,
+          ], (errInsert) => {
+              if (errInsert) {
+                  return res.json(errInsert);
+              }
+
+              return res.status(200).json("Veículo removido e movido para o histórico.");
+          });
+      });
+  });
 };
+
 
 export const login = (req, res) => {
     const values = [
@@ -173,4 +196,14 @@ export const deleteOcorrencia = (req, res) => {
 
         return res.status(200).json("Ocorrência deletada com sucesso");
     });
+};
+
+export const getHistorico = (_, res) =>{
+  const q = "SELECT * FROM historico";
+
+  db.query(q, (err, data) =>{
+      if(err) return res.json(err);
+
+      return res.status(200).json(data);
+  });
 };
