@@ -5,57 +5,69 @@ import axios from 'axios';
 
 const FormContainer = styled.form`
   display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
   border-radius: 5px;
+  max-width: 1120px;
+  margin: 0 auto;
+`;
+
+const Row = styled.div`
+  display: flex;
+  gap: 20px;
+  width: 100%;
 `;
 
 const InputArea = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const Input = styled.input`
-  width: 120px;
-  padding: 0 10px;
+  width: 100%;
+  padding: 10px;
   border: 1px solid #bbb;
   border-radius: 5px;
   height: 40px;
+  box-sizing: border-box;
+  margin-top: 8px;
 `;
 
-const Label = styled.label``;
+const Label = styled.label`
+  margin-bottom: 8px;
+  font-weight: bold;
+`;
 
 const Button = styled.button`
-  padding: 10px;
+  padding: 8px;
   cursor: pointer;
   border-radius: 5px;
   border: none;
   background-color: #2c73d2;
   color: white;
-  height: 42px;
+  height: 36px;
+  width: 100%;
 `;
 
 const Form = ({ onEdit, setOnEdit, getOcorrencias }) => {
   const ref = useRef();
 
-useEffect(() => {
-  if (onEdit) {
-    const user = ref.current;
+  useEffect(() => {
+    if (onEdit) {
+      const user = ref.current;
 
-    // Formatando a data para o formato esperado pelo input type='date'
-    const formattedDate = new Date(onEdit.data).toISOString().split('T')[0];
-    
-    user.data.value = formattedDate;
+      const formattedDate = new Date(onEdit.data).toISOString().split('T')[0];
 
-    // Certifique-se de que a propriedade observacao está correta
-    user.observacao.value = onEdit.descricao;
-  }
-}, [onEdit]);
-
+      user.data.value = formattedDate;
+      user.observacao.value = onEdit.descricao;
+    }
+  }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,15 +105,17 @@ useEffect(() => {
 
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
-      <InputArea>
-        <Label>Data da Ocorrência</Label>
-        <Input name='data' type='date' />
-      </InputArea>
+      <Row>
+        <InputArea>
+          <Label>Data da Ocorrência</Label>
+          <Input name='data' type='date' />
+        </InputArea>
 
-      <InputArea>
-        <Label>Observação</Label>
-        <Input name='observacao' />
-      </InputArea>
+        <InputArea>
+          <Label>Observação</Label>
+          <Input name='observacao' />
+        </InputArea>
+      </Row>
 
       <Button type='submit'>Salvar</Button>
     </FormContainer>

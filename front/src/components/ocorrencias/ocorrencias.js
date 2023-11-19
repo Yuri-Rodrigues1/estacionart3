@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+import "./Ocorrencias.css"
+
 function Ocorrencias() {
   const [ocorrencias, setOcorrencias] = useState([]);
   const [onEdit, setOnEdit] = useState(null);

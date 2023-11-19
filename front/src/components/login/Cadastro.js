@@ -28,26 +28,30 @@ function Cadastro() {
       <Formik initialValues={{}} onSubmit={handleClickCadastro} validationSchema={validationCadastro}>
         <Form className='cadastro-form'>
           <div className='cadastro-form-group'>
-            <Field name="email" className="form-field" placeholder="Digite seu email" />
+            <label htmlFor="email">Email</label>
+            <Field name="email" id="email" className="form-field" placeholder="Digite seu email" />
             <ErrorMessage component="span" name="email" className="form-error" />
           </div>
-
+  
           <div className='cadastro-form-group'>
-            <Field name="password" className="form-field" placeholder="Digite sua senha" />
+            <label htmlFor="password">Senha</label>
+            <Field name="password" id="password" className="form-field" placeholder="Digite sua senha" />
             <ErrorMessage component="span" name="password" className="form-error" />
           </div>
-
+  
           <div className='cadastro-form-group'>
-            <Field name="confirmpassword" className="form-field" placeholder="Confirme sua senha" />
+            <label htmlFor="confirmpassword">Confirme sua senha</label>
+            <Field name="confirmpassword" id="confirmpassword" className="form-field" placeholder="Confirme sua senha" />
             <ErrorMessage component="span" name="confirmpassword" className="form-error" />
           </div>
-
+  
           <button className='btn btn-success' type='submit'>Criar</button>
           <Link to="/" className='btn btn-danger'>Voltar</Link>
         </Form>
       </Formik>
     </div>
-    </div>
+  </div>
+  
   );
 }
 

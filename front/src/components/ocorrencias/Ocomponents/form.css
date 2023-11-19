@@ -1,0 +1,43 @@
+/* Estilo para o contêiner do formulário */
+.FormContainer {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo para a área de entrada */
+  .InputArea {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para o rótulo */
+  .Label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  /* Estilo para a entrada de dados */
+  .Input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilo para o botão de envio */
+  .Button {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilo para o botão de envio ao passar o mouse */
+  .Button:hover {
+    background-color: #45a049;
+  }
+  
