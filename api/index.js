@@ -14,14 +14,17 @@ export const db = mysql.createPool({
 });
 
 import {
-  getUsers,
-  addUser,
-  updateUser,
-  deleteUser,
-  login,
-  cadastro
+    getUsers,
+    addUser,
+    updateUser,
+    deleteUser,
+    login,
+    cadastro,
+    getOcorrencias,
+    addOcorrencia,
+    updateOcorrencia,
+    deleteOcorrencia
 } from "./control/user.js";
-
 
 app.get("/", getUsers);
 app.post("/", addUser);
@@ -30,6 +33,12 @@ app.delete("/:idVei", deleteUser);
 app.post("/login", login);
 app.post("/cadastro", cadastro);
 
+// Rotas corrigidas para ocorrencias
+app.get("/ocorrencias", getOcorrencias);
+app.post("/ocorrencias", addOcorrencia);
+app.put("/ocorrencias/:id", updateOcorrencia);
+app.delete("/ocorrencias/:id", deleteOcorrencia);
+
 app.listen(3000, () => {
-  console.log("Servidor está rodando na porta 3000");
+    console.log("Servidor está rodando na porta 3000");
 });

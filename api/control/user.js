@@ -115,3 +115,62 @@ export const login = (req, res) => {
       }
     });
   };
+
+  export const getOcorrencias = (_, res) =>{
+    const q = "SELECT * FROM ocorrencias";
+
+    db.query(q, (err, data) =>{
+        if(err) return res.json(err);
+
+        return res.status(200).json(data);
+    });
+};
+
+export const addOcorrencia = (req, res) => {
+    const q = "INSERT INTO ocorrencias (`data`, `descricao`) VALUES (?, ?)";
+
+    const values = [
+        req.body.data,
+        req.body.observacao,
+    ];
+
+    try {
+        db.query(q, values, (err) => {
+            if (err) {
+                console.error("Erro ao adicionar ocorrência:", err);
+                return res.status(500).json({ error: "Erro interno ao adicionar ocorrência" });
+            }
+
+            console.log("Ocorrência adicionada com sucesso!");
+            return res.status(200).json("Ocorrência adicionada com sucesso");
+        });
+    } catch (error) {
+        console.error("Erro ao processar a requisição:", error);
+        return res.status(500).json({ error: "Erro interno ao processar a requisição" });
+    }
+};
+
+export const updateOcorrencia = (req, res) => {
+    const q = "UPDATE ocorrencias SET `data` = ?, `descricao` = ? WHERE `id` = ?";
+
+    const values = [
+        req.body.data,
+        req.body.observacao,
+    ];
+
+    db.query(q, [...values, req.params.id], (err) => {
+        if(err) return res.json(err);
+
+        return res.status(200).json("Usuário atualizado com sucesso");
+    });
+};
+
+export const deleteOcorrencia = (req, res) => {
+    const q = "DELETE FROM ocorrencias WHERE `id` = ?";
+
+    db.query(q, [req.params.id], (err) => {
+        if(err) return res.json(err);
+
+        return res.status(200).json("Ocorrência deletada com sucesso");
+    });
+};
