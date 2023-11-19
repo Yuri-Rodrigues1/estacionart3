@@ -18,8 +18,10 @@ function Navbar() {
 
   return (
     <div className="navbar">
-      <button to="/historico">Histórico</button>
-      <button to="/ocorrencias">Ocorrências</button>
+      
+      <button><a href="/inicio">Inicio</a></button>
+      <button><a href="/historico">Histórico</a></button>
+      <button><a href="/ocorrencias">Ocorrências</a></button>
       <button onClick={openModal}>Valores</button>
       <Modal
         isOpen={modalIsOpen}
@@ -65,6 +67,7 @@ function Navbar() {
           </p>
           <button onClick={closeModal}>Fechar</button>
         </Modal>
+        <button><a href="/">Logout</a></button>
     </div>
   );
 }

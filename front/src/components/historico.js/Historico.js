@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Historico.css"
+import Navbar from '../navbar/Navbar';
 
 function Historico() {
     const [historico, setHistorico] = useState([]);
@@ -16,6 +17,8 @@ function Historico() {
     }, []);
 
     return (
+        <>
+        <Navbar />
         <div className='main-hist'>
             <h2>Histórico de Veículos Removidos</h2>
             <ul>
@@ -30,7 +33,7 @@ function Historico() {
                     </li>
                 ))}
             </ul>
-        </div>
+        </div></>
     );
 }
 
