@@ -16,7 +16,7 @@ function Historico() {
     }, []);
 
     return (
-        <div>
+        <div className='main-hist'>
             <h2>Histórico de Veículos Removidos</h2>
             <ul>
                 {historico.map((item) => (

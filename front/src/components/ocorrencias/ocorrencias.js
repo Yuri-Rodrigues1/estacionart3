@@ -28,7 +28,7 @@ function Ocorrencias() {
   return (
     <>
       <div>
-        <h3>Ocorrências</h3>
+        <h3 className="h2-oc">Ocorrências</h3>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getOcorrencias={getOcorrencias} />
         <Grid ocorrencias={ocorrencias} setOcorrencias={setOcorrencias} setOnEdit={setOnEdit} />
       </div>
