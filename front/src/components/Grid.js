@@ -3,6 +3,9 @@ import axios from "axios";
 import styled from "styled-components";
 import { FaCalculator, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import InputMask from 'react-input-mask';
+import { format } from 'date-fns';
+
 
 const Table = styled.table`
   width: 100%;
@@ -61,21 +64,28 @@ const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal, se
         </Tr>
       </Thead>
       <Tbody>
-        {users.map((item, i) => (
-          <Tr key={i}>
-            <Td width="25%">{item.placa}</Td>
-            <Td width="30%">{item.descricao}</Td>
-            <Td width="23%">{item.entrada}</Td>
-            <Td width="7%">{item.tipo}</Td>
-            <Td alignCenter width="6%">
-              <FaEdit onClick={() => handleEdit(item)} />
-            </Td>
-            <Td alignCenter width="6%">
-              <FaCalculator onClick={() => handleDelete(item)} />
-            </Td>
-          </Tr>
-        ))}
-      </Tbody>
+  {users.map((item, i) => (
+    <Tr key={i}>
+      <Td width="25%">{item.placa}</Td>
+      <Td width="30%">{item.descricao}</Td>
+      <Td width="23%">
+        <InputMask
+          mask="9999-99-99T99:99"
+          placeholder="YYYY-MM-DDTHH:mm"
+          value={format(new Date(item.entrada), 'yyyy-MM-dd\'T\'HH:mm')}
+          readOnly
+        />
+      </Td>
+      <Td width="7%">{item.tipo}</Td>
+      <Td alignCenter width="6%">
+        <FaEdit onClick={() => handleEdit(item)} />
+      </Td>
+      <Td alignCenter width="6%">
+        <FaCalculator onClick={() => handleDelete(item)} />
+      </Td>
+    </Tr>
+  ))}
+</Tbody>
     </Table>
   );
 };
