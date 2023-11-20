@@ -17,19 +17,31 @@ function Historico() {
 
     return (
         <div className='main-hist'>
-            <h2>Histórico de Veículos Removidos</h2>
-            <ul>
+            <h2>Histórico</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Descrição</th>
+                        <th>Entrada</th>
+                        <th>Tipo</th>
+                        <th>Tipo cliente</th>
+                        <th>saida</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {historico.map((item) => (
-                    <li key={item.id}>
-                        <p>Id: {item.id}</p>
-                        <p>Descrição: {item.descricao}</p>
-                        <p>entrada: {item.entrada}</p>
-                        <p>tipo: {item.tipo}</p>
-                        <p>tipo cliente: {item.tipocli}</p>
-                        <p>saida: {item.data_saida}</p>
-                    </li>
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.descricao}</td>
+                        <td>{item.entrada}</td>
+                        <td>{item.tipo}</td>
+                        <td>{item.tipocli}</td>
+                        <td>{item.data_saida}</td>
+                    </tr>
                 ))}
-            </ul>
+                </tbody>
+            </table>
         </div>
     );
 }

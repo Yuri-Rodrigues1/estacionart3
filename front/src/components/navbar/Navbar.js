@@ -18,8 +18,8 @@ function Navbar() {
 
   return (
     <div className="navbar">
-      <button to="/historico">Histórico</button>
-      <button to="/ocorrencias">Ocorrências</button>
+      <button to="/historico">Historico</button>
+      <button><a src="/ocorrencias">ocorrencias</a></button>
       <button onClick={openModal}>Valores</button>
       <Modal
         isOpen={modalIsOpen}
@@ -38,11 +38,6 @@ function Navbar() {
 
             <div className='valores'>
               <table>
-                <tr>
-                 <td>Fração:</td>
-                  <td>R$2,50</td>
-                  <td>R$1,50</td>                
-                </tr>
                 <tr>
                  <td>Hora:</td>
                  <td>R$10,00</td>
