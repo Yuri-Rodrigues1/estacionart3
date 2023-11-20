@@ -4,7 +4,7 @@ import Inicio from '../inicio/Inicio'
 import Login from '../login/Login'
 import Cadastro from '../login/Cadastro'
 import Ocorrencias from '../ocorrencias/Ocorrencias'
-import Historico from '../historico.js/Historico'
+import Historico from '../historico/Historico'
 
 function Rotas() {
   return (

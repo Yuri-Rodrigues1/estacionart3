@@ -18,8 +18,15 @@ function Navbar() {
 
   return (
     <div className="navbar">
+<<<<<<< HEAD
       <button to="/historico">Historico</button>
       <button><a src="/ocorrencias">ocorrencias</a></button>
+=======
+      
+      <button><a href="/inicio">Inicio</a></button>
+      <button><a href="/historico">Histórico</a></button>
+      <button><a href="/ocorrencias">Ocorrências</a></button>
+>>>>>>> faf9855c5d30a5c7b9c746faaf461895b7bb5eed
       <button onClick={openModal}>Valores</button>
       <Modal
         isOpen={modalIsOpen}
@@ -60,6 +67,7 @@ function Navbar() {
           </p>
           <button onClick={closeModal}>Fechar</button>
         </Modal>
+        <button><a href="/">Logout</a></button>
     </div>
   );
 }

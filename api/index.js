@@ -9,7 +9,7 @@ app.use(cors());
 export const db = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "123456",
+    password: "root123",
     database: "estacion",
 }); 
 

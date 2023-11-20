@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Historico.css"
+import Navbar from '../navbar/Navbar';
 
 function Historico() {
     const [historico, setHistorico] = useState([]);
@@ -16,6 +17,8 @@ function Historico() {
     }, []);
 
     return (
+        <>
+        <Navbar />
         <div className='main-hist'>
             <h2>Histórico</h2>
             <table>
@@ -40,9 +43,14 @@ function Historico() {
                         <td>{item.data_saida}</td>
                     </tr>
                 ))}
+<<<<<<< HEAD:front/src/components/historico.js/Historico.js
                 </tbody>
             </table>
         </div>
+=======
+            </ul>
+        </div></>
+>>>>>>> faf9855c5d30a5c7b9c746faaf461895b7bb5eed:front/src/components/historico/Historico.js
     );
 }
 

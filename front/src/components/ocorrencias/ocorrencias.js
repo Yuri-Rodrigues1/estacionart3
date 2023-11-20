@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import Navbar from '../navbar/Navbar';
 import "./Ocorrencias.css"
 
 function Ocorrencias() {
@@ -27,6 +27,7 @@ function Ocorrencias() {
 
   return (
     <>
+    <Navbar/>
       <div>
         <h3 className="h2-oc">Ocorrências</h3>
         <Form onEdit={onEdit} setOnEdit={setOnEdit} getOcorrencias={getOcorrencias} />
