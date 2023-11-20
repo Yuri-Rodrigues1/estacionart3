@@ -70,12 +70,13 @@ const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal, se
       <Td width="30%">{item.descricao}</Td>
       <Td width="23%">
         <InputMask
-          mask="9999-99-99T99:99"
+          mask="99-99-9999  99:99"
           placeholder="YYYY-MM-DDTHH:mm"
-          value={format(new Date(item.entrada), 'yyyy-MM-dd\'T\'HH:mm')}
+          value={format(new Date(item.entrada), 'dd-MM-yyyy\'T\'HH:mm')}
           readOnly
         />
       </Td>
+
       <Td width="7%">{item.tipo}</Td>
       <Td alignCenter width="6%">
         <FaEdit onClick={() => handleEdit(item)} />
