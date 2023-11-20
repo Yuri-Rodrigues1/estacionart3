@@ -70,6 +70,7 @@ const Grid = ({ users, setUsers, setOnEdit, setDeletedItem, openPaymentModal, se
       <Td width="30%">{item.descricao}</Td>
       <Td width="23%">
         <InputMask
+          style={{ border: 'none' }}
           mask="99-99-9999  99:99"
           placeholder="YYYY-MM-DDTHH:mm"
           value={format(new Date(item.entrada), 'dd-MM-yyyy\'T\'HH:mm')}
