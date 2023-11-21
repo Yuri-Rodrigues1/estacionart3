@@ -1,82 +1,108 @@
+/* Navbar */
 .navbar {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-  }
-  
-  .navbar a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-  }
-
-.modal-overLay {
-    background: #f8f9fa;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  background: rgba(248, 249, 250, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal Content */
 .modal-content {
   width: 90%;
-  margin-left: 30%;
-  margin-top: 5%;
   max-width: 500px;
+  margin: 5% auto;
   background-color: #f4f4f4;
-  padding: 10px;
+  padding: 20px;
   border-radius: 5px;
-  align-items: center;
-  color: rgb(63, 63, 65);
+  color: #3f3f41;
   border: 2px solid #ced4da;
   box-shadow: 0px 0px 5px #ccc;
-  
-
 }
 
 .modal-content button {
   margin-top: 20px;
   font-size: 14px;
-  padding: 5px;
+  padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
   color: white;
   border: 2px solid #ced4da;
   box-shadow: 0px 0px 5px #ccc;
   background-color: #dc3545;
-  
 }
 
-
 .modal-content h1 {
-  width: 20vw;
-  justify-content: space-around;
+  width: 100%;
   padding: 10px;
   color: white;
   background-color: #007bff;
   border-radius: 3px;
   border: 2px solid #ced4da;
   box-shadow: 0px 0px 5px #ccc;
-  
+  text-align: center;
 }
 
+/* Vehicle Section */
 .veiculos {
-  width: 220px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-left: 150px;
+  justify-content: space-around;
+  margin: 20px auto;
+  margin-left: 140px;
 }
 
-td {
-  width: 250px;
-  align-items: center;
-  justify-content: space-between;
-  
+/* Vehicle Name (h4) */
+.veiculos h4 {
+  margin-bottom: 0; /* Remover margem inferior padrão */
+  line-height: 1.5; /* Ajustar a altura da linha para alinhar verticalmente */
+}
+
+/* Table */
+.valores table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.valores td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  vertical-align: middle; /* Alinhar verticalmente o texto na célula */
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  .veiculos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .veiculos h4 {
+    margin-bottom: 10px;
+  }
+
+  td {
+    width: auto;
+  }
 }
