@@ -40,6 +40,28 @@ const Button = styled.button`
   margin-top: 30px;
 `;
 
+const submitButtonStyle = {
+  width: '100%',
+  height: '36px',
+  padding: '10px',
+  borderRadius: '5px',
+  border: 'none',
+  color: 'white',
+  backgroundColor: '#007bff', // Cor de fundo azul
+  boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.1)', // Sombra leve
+  cursor: 'pointer',
+  transition: 'background-color 0.3s ease', // Transição suave da cor de fundo
+  display: 'flex', // Torna o botão um contêiner flexível
+  alignItems: 'center', // Centraliza verticalmente o conteúdo
+  justifyContent: 'center', // Centraliza horizontalmente o conteúdo
+};
+
+const formContainerStyle = {
+  display: 'flex',         // Torna o formulário um contêiner flexível
+  alignItems: 'center',     // Centraliza os itens ao longo do eixo transversal (vertical)
+  justifyContent: 'center', // Centraliza os itens ao longo do eixo principal (horizontal)
+};
+
 const formattedDate = (dateString) => {
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -126,51 +148,59 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
   };
 
   return (
-    <FormContainer ref={ref} onSubmit={handleSubmit}>
-      <InputArea>
-        <Label>Placa</Label>
-        <Input
-          placeholder="xxx-xxxx"
-          name="placa"
-          value={placa}
-          onChange={handlePlaca}
-          maxLength={7}
-        />
-      </InputArea>
-      <InputArea>
-        <Label>Descrição</Label>
-        <Input name="descricao" />
-      </InputArea>
-      <InputArea>
-        <Label>Entrada</Label>
-        <input type="datetime-local" name="entrada" />
-      </InputArea>
+    <FormContainer ref={ref} onSubmit={handleSubmit} style={formContainerStyle}>
+    <InputArea>
+      <Label>Placa</Label>
+      <Input
+        placeholder="xxx-xxxx"
+        name="placa"
+        value={placa}
+        onChange={handlePlaca}
+        maxLength={7}
+      />
+    </InputArea>
+  
+    <InputArea>
+      <Label>Descrição</Label>
+      <Input name="descricao" />
+    </InputArea>
+  
+    <InputArea>
+      <Label>Entrada</Label>
+      <Input style={{width: 'auto'}} type="datetime-local" name="entrada" />
+    </InputArea>
+  
+    <InputArea style={{borderRadius: '5px'  }}>
+      <Label>Tipo</Label>
+      <select
+        value={selectedTipo}
+        onChange={(e) => setSelectedTipo(e.target.value)}
+        style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc' }}
+      >
+        <option value="">Selecione...</option>
+        <option value="1">Moto</option>
+        <option value="2">Carro</option>
+      </select>
+    </InputArea>
+  
+    <InputArea style={{borderRadius: '5px'}}>
+      <Label>Tipo Cli</Label>
+      <select
+        value={selectedTipocli}
+        onChange={(e) => setSelectedTipocli(e.target.value)}
+        style={{ width: '100%', padding: '8px', borderRadius: '3px', border: '1px solid #ccc' }}
+      >
+        <option value="">Selecione...</option>
+        <option value="1">Hora</option>
+        <option value="2">Diária</option>
+        <option value="3">Mensalista</option>
+      </select>
+    </InputArea>
+  
+    <Button type="submit" style={submitButtonStyle}>SALVAR</Button>
+  </FormContainer>
+  
 
-      <InputArea>
-        <Label>Tipo</Label>
-        <select
-          value={selectedTipo}
-          onChange={(e) => setSelectedTipo(e.target.value)}
-        >
-          <option value="">Selecione...</option>
-          <option value="1">Moto</option>
-          <option value="2">Carro</option>
-        </select>
-      </InputArea>
-      <InputArea>
-        <Label>Tipo Cli</Label>
-        <select
-          value={selectedTipocli}
-          onChange={(e) => setSelectedTipocli(e.target.value)}
-        >
-          <option value="">Selecione...</option>
-          <option value="1">Hora</option>
-          <option value="2">Diaria</option>
-          <option value="3">Mensalista</option>
-        </select>
-      </InputArea>
-      <Button type="submit">SALVAR</Button>
-    </FormContainer>
   );
 };
 
